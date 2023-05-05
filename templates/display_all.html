@@ -50,167 +50,7 @@
 
 			if (en) announcement_texts['en-us'].message = en.message
 				.replace('{}', "{{ alias.office }}")
-		})		
-
-		/*var stream1 = JsonStream({
-			url: "{{feed_url[0]}}",    
-			duration: refreshRate / 1000,
-			effect_class: ".effectit-1",
-			effect_do_class: ".effectdoit-1",
-			effect_duration: parseInt("{{ ts.mduration }}"),
-			data_attr: 'stream-data-1',
-			ensure_class: "ensureit-1",
-			ensure_value: "id",
-			effect_repeats: parseInt("{{ ts.repeats }}"),
-			use_effect: 'true',
-			use_effect_do: 'true',
-			effect: "{{ ts.effect }}",
-			todo: function (data, toPlay) {}
-		});
-
-		  var stream2 = JsonStream({
-			url: "{{feed_url[1]}}",    
-			duration: refreshRate / 1000,
-			effect_class: ".effectit-2",
-			effect_do_class: ".effectdoit-2",
-			effect_duration: parseInt("{{ ts.mduration }}"),
-			data_attr: 'stream-data-2',
-			ensure_class: "ensureit-2",
-			ensure_value: "id",
-			effect_repeats: parseInt("{{ ts.repeats }}"),
-			use_effect: 'true',
-			use_effect_do: 'true',
-			effect: "{{ ts.effect }}",
-			todo: function (data, toPlay) {}
-		  });
-		
-		  var stream3 = JsonStream({
-			url: "{{feed_url[2]}}",
-			duration: refreshRate / 1000,
-			effect_class: ".effectit-3",
-			effect_do_class: ".effectdoit-3",
-			effect_duration: parseInt("{{ ts.mduration }}"),
-			data_attr: 'stream-data-3',
-			ensure_class: "ensureit-3",
-			ensure_value: "id",
-			effect_repeats: parseInt("{{ ts.repeats }}"),
-			use_effect: 'true',
-			use_effect_do: 'true',
-			effect: "{{ ts.effect }}",
-			todo: function(data, toPlay) {}
-		  });
-
-		  var stream4 = JsonStream({
-			url: "{{feed_url[3]}}",
-			duration: refreshRate / 1000,
-			effect_class: ".effectit-4",
-			effect_do_class: ".effectdoit-4",
-			effect_duration: parseInt("{{ ts.mduration }}"),
-			data_attr: "stream-data-4",
-			ensure_class: "ensureit-4",
-			ensure_value: "id",
-			effect_repeats: parseInt("{{ ts.repeats }}"),
-			use_effect: "true",
-			use_effect_do: "true",
-			effect: "{{ ts.effect }}",
-			todo: function (data, toPlay) {}
-		  });
-		
-		var stream5 = JsonStream({
-			url: "{{feed_url[4]}}",
-			duration: refreshRate / 1000,
-			effect_class: ".effectit-5",
-			effect_do_class: ".effectdoit-5",
-			effect_duration: parseInt("{{ ts.mduration }}"),
-			data_attr: 'stream-data-5',
-			ensure_class: "ensureit-5",
-			ensure_value: "id",
-			effect_repeats: parseInt("{{ ts.repeats }}"),
-			use_effect: 'true',
-			use_effect_do: 'true',
-			effect: "{{ ts.effect }}",
-			todo: function (data, toPlay) {}
-		});	
-		var stream6 = JsonStream({
-			url: "{{feed_url[5]}}",
-			duration: refreshRate / 1000,
-			effect_class: ".effectit-6",
-			effect_do_class: ".effectdoit-6",
-			effect_duration: parseInt("{{ ts.mduration }}"),
-			data_attr: 'stream-data-6',
-			ensure_class: "ensureit-6",
-			ensure_value: "id",
-			effect_repeats: parseInt("{{ ts.repeats }}"),
-			use_effect: 'true',
-			use_effect_do: 'true',	
-			effect: "{{ ts.effect }}",
-			todo: function (data, toPlay) {}
-		  });
-		  
-		  var stream7 = JsonStream({
-			url: "{{feed_url[6]}}",
-			duration: refreshRate / 1000,
-			effect_class: ".effectit-7",
-			effect_do_class: ".effectdoit-7",
-			effect_duration: parseInt("{{ ts.mduration }}"),
-			data_attr: 'stream-data-7',
-			ensure_class: "ensureit-7",
-			ensure_value: "id",
-			effect_repeats: parseInt("{{ ts.repeats }}"),
-			use_effect: 'true',
-			use_effect_do: 'true',
-			effect: "{{ ts.effect }}",
-			todo: function (data, toPlay) {}
-		  });
-		  
-		  var stream8 = JsonStream({
-			url: "{{feed_url[7]}}",
-			duration: refreshRate / 1000,
-			effect_class: ".effectit-8",
-			effect_do_class: ".effectdoit-8",
-			effect_duration: parseInt("{{ ts.mduration }}"),
-			data_attr: 'stream-data-8',
-			ensure_class: "ensureit-8",
-			ensure_value: "id",
-			effect_repeats: parseInt("{{ ts.repeats }}"),
-			use_effect: 'true',
-			use_effect_do: 'true',
-			effect: "{{ ts.effect }}",
-			todo: function (data, toPlay) {}
-		  });
-		  
-		  var stream9 = JsonStream({
-			url: "{{feed_url[8]}}",
-			duration: refreshRate / 1000,
-			effect_class: ".effectit-9",
-			effect_do_class: ".effectdoit-9",
-			effect_duration: parseInt("{{ ts.mduration }}"),
-			data_attr: 'stream-data-9',
-			ensure_class: "ensureit-9",
-			ensure_value: "id",
-			effect_repeats: parseInt("{{ ts.repeats }}"),
-			use_effect: 'true',
-			use_effect_do: 'true',
-			effect: "{{ ts.effect }}",
-			todo: function (data, toPlay) {}
-		  });
-		  
-		  var stream10 = JsonStream({
-			url: "{{feed_url[9]}}",
-			duration: refreshRate / 1000,
-			effect_class: ".effectit-10",
-			effect_do_class: ".effectdoit-10",
-			effect_duration: parseInt("{{ ts.mduration }}"),
-			data_attr: 'stream-data-10',
-			ensure_class: "ensureit-10",
-			ensure_value: "id",
-			effect_repeats: parseInt("{{ ts.repeats }}"),
-			use_effect: 'true',
-			use_effect_do: 'true',
-			effect: "{{ ts.effect }}",
-			todo: function (data, toPlay) {}
-		  });		
-		*/	
+		})
 		
 		for (var i = 1; i <= 22; i++) {
 			var stream = JsonStream({
@@ -226,13 +66,35 @@
 			  use_effect: "true",
 			  use_effect_do: "true",
 			  effect: "{{ ts.effect }}",
-			  todo: function(data, toPlay) {}
+			  todo: function(data, toPlay) {
+				if (announcement_texts) {
+					if (playAnnouncements) {
+						$.when.apply($, languages.map(function(language, index) {
+							var promise = $.Deferred()
+							var message = announcement_texts[language].message
+							var link = '/gtts/' + language + '/'
+	
+							if (singleRowQueuing) link += data.cot
+							else link += data.cot + message + data.con
+	
+							if (!data.con || !data.cot) promise.reject()
+							else $.get(link)
+								.then(function(json) { promise.resolve(json.mp3) })
+								.fail(function(e) { promise.reject(e) })
+	
+							return promise
+						}))
+						.then(function() {
+							var files = $.makeArray(arguments).sort()
+	
+							if (playAudioNotification) files.unshift(audioNotification)
+							play(files)
+						}).fail(function (e) { console.log(e) })
+					} else if (playAudioNotification) play([audioNotification])
+				}				
+			  }
 			});
-		  }
-		  
-
-				  
-		  
+		  }		  				  		  
 
 	var watcher = setInterval(function () {
 		var url = '/repeat_announcement'
