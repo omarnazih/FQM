@@ -46,6 +46,7 @@ def create_app(config={}):
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI',
                                                            (f'sqlite:///{absolute_path(DATABASE_FILE)}'
                                                             '?check_same_thread=False'))
+
     app.config['DB_NAME'] = DATABASE_FILE
     # Autoreload if templates change
     app.config['TEMPLATES_AUTO_RELOAD'] = True

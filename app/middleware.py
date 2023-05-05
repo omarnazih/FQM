@@ -13,12 +13,14 @@ from app.constants import MIGRATION_FOLDER
 
 
 class LazyCelery:
+    # !TODO : Remove CELERYD_DEBUG : True
     config = {
         'broker_url': os.environ.get('CELERY_BROKER_URL'),
         'result_backend': os.environ.get('CELERY_RESULT_BACKEND'),
+        'CELERYD_DEBUG':True,
     }
 
-    def __init__(self, flask_app=None):
+    def __init__(self, flask_app=None): 
         self._flask_app = flask_app
         self._celery_app = None
 
@@ -26,11 +28,8 @@ class LazyCelery:
         if flask_app:
             self._flask_app = flask_app
 
-        # if self._celery_app:
-        #     self._celery_app.main = flask_app.import_name
-
     def _create_app(self):
-        self._celery_app = Celery('app.main')
+        self._celery_app = Celery('app.main')     
         self._celery_app.conf.update(self.config)
 
         class ContextTask(self._celery_app.Task):

@@ -1,7 +1,7 @@
  <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/.  -->
-{% extends "base_new.html" %}
+{% extends "base_s.html" %}
 {% block title %} FQM - {{ page_title }} {% endblock %}
 
 
@@ -50,7 +50,7 @@
 			if (en) announcement_texts['en-us'].message = en.message
 				.replace('{}', "{{ alias.office }}")
 		})
-	
+
 	var stream = JsonStream({
 		url: "{{ feed_url }}",
 		duration: refreshRate / 1000,
@@ -108,6 +108,58 @@
 	}, refreshRate / 2)
 
 </script>
+<style>
+	body {
+		{% if ts.bgcolor[:3] == "rgb" %}
+		background: {{ ts.bgcolor }};
+		{% else %}
+		background-image: url({{ url_for('static', filename='multimedia/'+ts.bgcolor) }});
+		{% endif %}
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-position: center;
+		background-size: cover;
+	}
+	.vertical-center {
+		min-height: 100%;
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+	}
+	.title {
+		color: {{ ts.hcolor }};
+		background: {{ ts.hbg }};
+		font-size: {{ ts.hsize }};
+		font-family: '{{ ts.hfont }}';
+	}
+	.offices {
+		color: {{ ts.tcolor }};
+		font-family: '{{ ts.tfont }}';
+		font-size: {{ ts.tsize }};
+		background: {{ ts.hbg }};
+	}
+	.tasks {
+		color: {{ ts.h2color }};
+		font-family: '{{ ts.h2font }}';
+		font-size: {{ ts.h2size }};
+		background: {{ ts.hbg }};
+	}
+	.slideDim {
+		height: 600px;
+		width: 1300px;
+	}
+	.tickets {
+		color: {{ ts.scolor }};
+		font-family: {{ ts.sfont }};
+		font-size: {{ ts.ssize }};
+		background: {{ ts.hbg }};
+	}
+	.inline {
+		display: inline-block;
+	}
+</style>
+
+
 {% if tv == 0 %}
 <div class="row">
     <div class="col-xs-12 text-center">
@@ -234,27 +286,204 @@
 </div>
 {% endif %}
 
+
 {% elif tv == 1 %}
 <div class="row">
-    <div>
-		<h1 style="text-align: center; margin-top:10vh;"> {{ts.title}}</h1>
+    <div class="col-xs-12 text-center">
+		<h1 class='title mt-1 mb-1'> {{ ts.title }} </h1>
     </div>
 </div>
-<div class="row text-center mt-1" style="margin-top:25vh; text-align:center">
+<div class="row text-center mt-1">
 	{% if not settings.single_row %}
     <div class="col-xs-4">
-	    <h1 class='offices' style="color:#ead057;">
-				عيادة:
-				<u><p stream='con' class='effectit ensureit inline' style="display:inline;">{{ translate('Empty', 'en', [defLang]) }}</p></u>
+	    <h1 class='offices'>
+				{% if alias.office != 'Office' %}{{ alias.office }}{% else %}{{ translate('Office', 'en', [defLang]) }}{% endif %} : 
+				<p stream='con' class='effectit ensureit inline'>{{ translate('Empty', 'en', [defLang]) }}</p>
 		</h1>
+	</div>
+    <div class="col-xs-4">
+      	<h1 class='tasks'>
+					{% if alias.task != 'Task' %}{{ alias.task }}{% else %}{{ translate('Task', 'en', [defLang]) }}{% endif %} : 
+			<p class='effectit ensureit inline' stream='cott'>{{ translate('Empty', 'en', [defLang]) }}</p>
+	  	</h1>
 	</div>
 	{% endif %}
     <div class="col-xs-4">
-	    <h1 class='tasks' style="color:#ead057;">
-			رقم التذكرة:
-			<u><p class='effectdoit ensureit inline' stream='cot' style="display: inline;">{{ translate('Empty', 'en', [defLang]) }}</p></u>
+	    <h1 class='tasks'>
+			{% if alias.ticket != 'Ticket' %}{{ alias.ticket }}{% else %}{{ translate('Ticket', 'en', [defLang]) }}{% endif %} : 
+			<p class='effectdoit ensureit inline' stream='cot'>{{ translate('Empty', 'en', [defLang]) }}</p>
 		</h1>
     </div>
+</div>
+<div class="row text-center mt-3">
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='w1'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='w2'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='w3'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='w4'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+</div>
+<div class="row text-center mt-1">
+    <br>
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='w5'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='w6'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='w7'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='w8'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+</div>
+
+
+{% elif tv == 2 %}
+<div class="row vertical-center text-center">
+    <div class="col-xs-6">
+		  <h1 class='title mb-10'> {{ ts.title }} </h1>
+		{% if not settings.single_row %}
+		<h1 class='offices mb-5'>
+			{% if alias.office != 'Office' %}{{ alias.office }}{% else %}{{ translate('Office', 'en', [defLang]) }}{% endif %} : 
+			<p stream='con' class='effectit ensureit inline'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+      	<h1 class='tasks mb-5'>
+					{% if alias.task != 'Task' %}{{ alias.task }}{% else %}{{ translate('Task', 'en', [defLang]) }}{% endif %} : 
+			<p class='effectit ensureit inline' stream='cott'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+		{% endif %}
+		<h1 class='tasks'>
+			{% if alias.ticket != 'Ticket' %}{{ alias.ticket }}{% else %}{{ translate('Ticket', 'en', [defLang]) }}{% endif %} : 
+			<p class='effectdoit ensureit inline' stream='cot'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+    <div class="col-xs-3">
+	    <h1 class='tickets mb-10'>
+			<p class='watchit inline' stream='w1'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+	    <h1 class='tickets mb-10'>
+			<p class='watchit inline' stream='w2'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+	    <h1 class='tickets mb-10'>
+			<p class='watchit inline' stream='w3'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+		<h1 class='tickets mb-10'>
+			<p class='watchit inline' stream='w4'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+    <div class="col-xs-3">
+	    <h1 class='tickets mb-10'>
+			<p class='watchit inline' stream='w5'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+	    <h1 class='tickets mb-10'>
+			<p class='watchit inline' stream='w6'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+	    <h1 class='tickets mb-10'>
+			<p class='watchit inline' stream='w7'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+		<h1 class='tickets mb-10'>
+			<p class='watchit inline' stream='w8'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+</div>
+
+
+{% elif tv == 3 %}
+<div class="row">
+    <div class="col-xs-12 text-center">
+		<h1 class='title mt-1 mb-1'> {{ ts.title }} </h1>
+    </div>
+</div>
+<div class="row text-center mt-5">
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='w1'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='w2'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='w3'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='w4'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+</div>
+<div class="row text-center mt-5">
+	{% if not settings.single_row %}
+    <div class="col-xs-4">
+	    <h1 class='offices'>
+				{% if alias.office != 'Office' %}{{ alias.office }}{% else %}{{ translate('Office', 'en', [defLang]) }}{% endif %} : 
+				<p stream='con' class='effectit ensureit inline'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+	</div>
+    <div class="col-xs-4">
+      	<h1 class='tasks'>
+					{% if alias.task != 'Task' %}{{ alias.task }}{% else %}{{ translate('Task', 'en', [defLang]) }}{% endif %} : 
+			<p class='effectit ensureit inline' stream='cott'>{{ translate('Empty', 'en', [defLang]) }}</p>
+	  	</h1>
+	</div>
+	{% endif %}
+    <div class="col-xs-4">
+	    <h1 class='tasks'>
+			{% if alias.ticket != 'Ticket' %}{{ alias.ticket }}{% else %}{{ translate('Ticket', 'en', [defLang]) }}{% endif %} : 
+			<p class='effectdoit ensureit inline' stream='cot'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+</div>
+<div class="row text-center mt-5">
+    <br>
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='p1'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='p2'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='p3'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+    </div>
+    <div class="col-xs-3">
+		<h1 class='tickets'>
+			<p class='watchit inline' stream='p4'>{{ translate('Empty', 'en', [defLang]) }}</p>
+		</h1>
+	</div>
 </div>
 {% endif %}
 {% endblock %}

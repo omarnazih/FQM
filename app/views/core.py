@@ -149,7 +149,7 @@ def serial(task, office_id=None):
     name_or_number = remove_string_noise(form.name.data or '',
                                          lambda s: s.startswith('0'),
                                          lambda s: s[1:]) or None
-
+    
     # NOTE: if it is registered ticket, will display the form
     if not form.validate_on_submit() and not printed:
         return render_template('touch.html', title=touch_screen_stings.title,
@@ -345,6 +345,7 @@ def feed(office_id=None):
     ''' stream list of waiting tickets and current ticket. '''
     display_settings = data.Display_store.get()
     single_row = data.Settings.get().single_row
+
     current_ticket = data.Serial.get_last_pulled_ticket(office_id)
     empty_text = gtranslator.translate('Empty', dest=[session.get('lang')])
     current_ticket_text = current_ticket and current_ticket.display_text or empty_text
@@ -358,7 +359,7 @@ def feed(office_id=None):
         tickets_parameters = {
             f'w{_index + 1}': f'{_resolve_ticket_index(_index)}{number}'
             for _index, number in enumerate(range(getattr(current_ticket, 'number', 1) + 1,
-                                                  getattr(current_ticket, 'number', 1) + 10))}
+                                                getattr(current_ticket, 'number', 1) + 10))}
     else:
         waiting_tickets = (data.Serial.get_waiting_list_tickets(office_id) + ([None] * 9))[:9]
         tickets_parameters = {
@@ -377,14 +378,14 @@ def feed(office_id=None):
     # NOTE: Ensure `tickets_parameters` last value is as distinct as the `current_ticket`
     # To fix `uniqueness` not picking up the change in passed waiting list
     tickets_parameters[f'w{len(tickets_parameters)}'] = (current_ticket.name
-                                                         if current_ticket.n else
-                                                         current_ticket.number
-                                                         ) if current_ticket else empty_text
+                                                        if current_ticket.n else
+                                                        current_ticket.number
+                                                        ) if current_ticket else empty_text
 
     return jsonify(con=current_ticket_office_name,
-                   cot=current_ticket_text,
-                   cott=current_ticket_task_name,
-                   **tickets_parameters)
+                cot=current_ticket_text,
+                cott=current_ticket_task_name,
+                **tickets_parameters)
 
 
 @core.route('/repeat_announcement', defaults={'office_id': None})
@@ -420,6 +421,22 @@ def display(office_id=None):
     video_settings = data.Vid.query.first()
     feed_url = url_for('core.feed', office_id=office_id)
 
+        
+    print(feed_url)
+    if office_id == None:
+        feed_urls = []
+        for i in range(1, 22):
+            feed_url = url_for('core.feed', office_id=i)
+            feed_urls.append(feed_url)
+        return render_template('display_all.html',
+                            audio=1 if display_settings.audio == 'true' else 0,
+                            audio_2=1 if display_settings.announce != 'false' else 0,
+                            ss=slides, sli=slideshow_settings, ts=display_settings,
+                            slides=data.Slides.query, tv=display_settings.tmp,
+                            page_title='Display Screen', anr=display_settings.anr,
+                            alias=aliases_settings, vid=video_settings,
+                            feed_url=feed_urls, office_id=office_id)        
+
     return render_template('display.html',
                            audio=1 if display_settings.audio == 'true' else 0,
                            audio_2=1 if display_settings.announce != 'false' else 0,
@@ -450,7 +467,7 @@ def touch(a, office_id=None):
     return render_template('touch.html', ts=touch_screen_stings, tasks=tasks.all(),
                            tnumber=numeric_ticket_form, page_title='Touch Screen',
                            alias=aliases_settings, form=form, d=a == 1,
-                           a=touch_screen_stings.tmp, office_id=office_id)
+                           a=touch_screen_stings.tmp, office_id=office_id, office=office)
 
 
 @core.route('/settings/<setting>', defaults={'togo': None})

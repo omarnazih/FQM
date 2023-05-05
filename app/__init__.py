@@ -19,6 +19,7 @@ if os.environ.get('DOCKER'):
 
 if app_settings:
     app = bundle_app(app_settings)
+    app.debug=True
     celery_app.init_app(app)
     celery = celery_app.app
     CeleryTasks.register()
