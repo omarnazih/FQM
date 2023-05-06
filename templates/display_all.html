@@ -9,7 +9,7 @@
 <script type="text/javascript" src="{{ url_for('static', filename='jsonstream.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='audiosequence.min.js') }}"></script>
 <script src="{{ url_for('static', filename='extFunctions.js') }}" type='text/javascript'></script>
-<script type='text/javascript'>
+<script type='text/javascript'>	  
 	var announcement_texts = undefined
 	var singleRowQueuing = !!"{% if settings.single_row %}on{% endif %}"
 	var audioNotification = "{{'/static/multimedia/'+ts.audio}}"
@@ -115,14 +115,28 @@
 
 </script>
 <style>
+
+	.grid-container {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		grid-gap: 10px;
+		max-width: 100%;
+		padding: 0 20px;
+		margin: 0 auto;
+	  }
+
 	.cell {
+
+		max-width: 25vw;
+		max-height: 25vh;
+		padding: 20px;		
 		display: flex;
 		align-items: center;
+		text-align: center;
 		justify-content: center;		
 		border: 1px solid #ead057;
-		width: 23vw;
-		height: 23vh;
-		margin-bottom: 10px;
+				
+
 		}
 
 	.tasks,.offices{
@@ -262,12 +276,10 @@
     </div>
 </div>
 <hr>
-<div class="row text-center mt-1" style="text-align:center">	
-	<div class="grid">
-		{% for i in range(1, 5) %}
+<!-- <div style="text-align:center">	 -->
+	<div class="grid-container">
+		{% for i in range(1, 23) %}
 		<div class="cell">
-		<div class="col-4">
-		  <div class="box">
 			<h1 class="offices" style="color:#ead057;">
 			  عيادة:
 			  <u><p stream-data-{{ i }}="con" class="effectit-{{ i }} ensureit-{{ i }} inline" style="display:inline;">{{ translate('Empty', 'en', [defLang]) }}</p></u>
@@ -276,12 +288,26 @@
 			  رقم التذكرة:
 			  <u><p class="effectdoit-{{ i }} ensureit-{{ i }} inline" stream-data-{{ i }}="cot" style="display: inline;">{{ translate('Empty', 'en', [defLang]) }}</p></u>
 			</h1>
-		  </div>
-		</div>
 		</div>
 		{% endfor %}
 	</div>
+	
 
+	<!-- <div class="grid-container">
+		{% for i in range(1, 23) %}
+		<div class="cell">
+			<h1 class="offices" style="color:#ead057;">
+			  عيادة:
+			  <u><p stream-data-{{ i }}="con" class="effectit-{{ i }} ensureit-{{ i }} inline" style="display:inline;">{{ translate('Empty', 'en', [defLang]) }}</p></u>
+			</h1>
+			<h1 class="tasks" style="color:#ead057;">
+			  رقم التذكرة:
+			  <u><p class="effectdoit-{{ i }} ensureit-{{ i }} inline" stream-data-{{ i }}="cot" style="display: inline;">{{ translate('Empty', 'en', [defLang]) }}</p></u>
+			</h1>
+		</div>
+		{% endfor %}
+	</div> -->
+<!-- 		
 	<div class="grid">
 		{% for i in range(5, 9) %}
 		<div class="cell">
@@ -375,9 +401,9 @@
 		</div>
 		</div>
 		{% endfor %}
-	</div>		
+	</div>		 -->
 
 	  
-</div>
+<!-- </div> -->
 {% endif %}
 {% endblock %}
